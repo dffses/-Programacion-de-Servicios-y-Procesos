@@ -36,7 +36,6 @@ void main(){
 
     printf("Todos mis hijos han terminado\n");
     printf("Soy el padre y mi pid es: %d\n",getpid());
-    printf("Soy el proceso hijo p2 y mi pid es: %d\n",p2);
-    printf("Soy el proceso hijo p3 y mi pid es: %d\n",p3);
+    exit(0);
 
 }
