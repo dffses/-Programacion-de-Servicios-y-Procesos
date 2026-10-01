@@ -1,0 +1,74 @@
+#include <stdlib.h>
+#include <unistd.h>
+#include <stdio.h>
+#include <sys/types.h>
+#include <sys/wait.h>
+
+
+void main(){
+    pid_t  p_p1,p_p2,p_p3,p_p4;
+
+    p_p2=fork();
+
+    if(p_p2==0){
+        
+        p_p2=getpid();
+        p_p1=getppid();
+        if (p_p2%2==0)
+        {
+            printf("Soy el proceso P2 y mi pid es: %d y el de mi padre es: %d\n",p_p2,p_p1);
+        }else
+        {
+            printf("Soy el proceso P2 y mi pid es; %d\n",p_p2);
+        }
+        
+        
+    }else{      
+        wait(NULL);
+        p_p3=fork();
+
+        if (p_p3==0)
+        {
+            p_p3=getpid();
+            p_p1=getppid();
+        if (p_p3%2==0)
+        {
+            printf("Soy el proceso P3 y mi pid es: %d y el de mi padre es: %d\n",p_p3,p_p1);
+        }else
+        {
+        
+            printf("Soy el proceso P3 y mi pid es; %d\n",p_p3);
+            
+        }
+        
+        p_p4=fork();
+        if (p_p4==0) 
+        {
+            p_p4=getpid(); 
+            if (p_p4%2==0)
+        {
+            printf("Soy el proceso P4 y mi pid es: %d y el de mi padre es: %d\n",p_p4,p_p3);
+        }
+        else
+        {
+            
+            printf("Soy el proceso P4 y mi pid es; %d\n",p_p4);
+        
+        }
+        
+        }else
+        {
+        
+        wait(NULL);
+        printf("Soy el p3 padre y mi hijo ha terminado\n");
+                
+        }
+        
+        }else
+        {
+             wait(NULL);
+             printf("Soy el p1 padre y mi hijo ha terminado\n");
+        }
+    }
+
+}
